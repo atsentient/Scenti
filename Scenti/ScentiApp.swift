@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct ScentiApp: App {
-    let persistenceContainer = PersistenceController.shared
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceContainer.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                        
         }
     }
 }

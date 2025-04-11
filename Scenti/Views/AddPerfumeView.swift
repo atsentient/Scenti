@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct AddPerfumeView: View {
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.dismiss) private var dismiss
-    
-    @State var name: String = ""
-    @State var brand: String = ""
-    @State var notes: String = ""
+    @Environment(\.managedObjectContext) private var moc
+       @Environment(\.dismiss) private var dismiss
+
+       @State private var name = ""
+       @State private var brand = ""
+       @State private var notes = ""
 
     var body: some View {
         TextField("brand", text: $brand)
@@ -40,10 +40,17 @@ struct AddPerfumeView: View {
         newPerfume.brand = brand
         newPerfume.notes = notes
         newPerfume.createdAt = Date()
+        print(
+            "ID: \(newPerfume.id?.uuidString ?? "nil")",
+            "Name: \(newPerfume.name ?? "nil")",
+            "Brand: \(newPerfume.brand ?? "nil")",
+            "Notes: \(newPerfume.notes ?? "nil")",
+            "Created: \(newPerfume.createdAt?.description ?? "nil")"
+        )
 
         do {
             try moc.save()
-            print("Perfume saved!")
+            dismiss()
         } catch {
             print("Failed to save perfume: \(error.localizedDescription)")
         }

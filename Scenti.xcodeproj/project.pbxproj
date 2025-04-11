@@ -13,7 +13,7 @@
 		D934AA6E2DA9712900858E86 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D934AA6D2DA9712900858E86 /* Preview Assets.xcassets */; };
 		D934AA762DA9718800858E86 /* CDPerfume.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA752DA9718800858E86 /* CDPerfume.swift */; };
 		D934AA792DA971B600858E86 /* APIcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA782DA971B600858E86 /* APIcode.swift */; };
-		D934AA7C2DA971CB00858E86 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D934AA7A2DA971CB00858E86 /* DataModel.xcdatamodeld */; };
+		D934AA7C2DA971CB00858E86 /* Scenti.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D934AA7A2DA971CB00858E86 /* Scenti.xcdatamodeld */; };
 		D934AA7F2DA9724000858E86 /* PerfumeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA7E2DA9724000858E86 /* PerfumeListView.swift */; };
 		D934AA812DA9724C00858E86 /* AddPerfumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA802DA9724C00858E86 /* AddPerfumeView.swift */; };
 		D934AA832DA9876B00858E86 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA822DA9876B00858E86 /* Persistance.swift */; };
@@ -97,7 +97,7 @@
 			children = (
 				D934AA822DA9876B00858E86 /* Persistance.swift */,
 				D934AA752DA9718800858E86 /* CDPerfume.swift */,
-				D934AA7A2DA971CB00858E86 /* DataModel.xcdatamodeld */,
+				D934AA7A2DA971CB00858E86 /* Scenti.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -181,7 +181,7 @@
 			files = (
 				D934AA762DA9718800858E86 /* CDPerfume.swift in Sources */,
 				D934AA792DA971B600858E86 /* APIcode.swift in Sources */,
-				D934AA7C2DA971CB00858E86 /* DataModel.xcdatamodeld in Sources */,
+				D934AA7C2DA971CB00858E86 /* Scenti.xcdatamodeld in Sources */,
 				D934AA692DA9712800858E86 /* ContentView.swift in Sources */,
 				D934AA812DA9724C00858E86 /* AddPerfumeView.swift in Sources */,
 				D934AA832DA9876B00858E86 /* Persistance.swift in Sources */,
@@ -394,13 +394,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D934AA7A2DA971CB00858E86 /* DataModel.xcdatamodeld */ = {
+		D934AA7A2DA971CB00858E86 /* Scenti.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				D934AA7B2DA971CB00858E86 /* Model.xcdatamodel */,
 			);
 			currentVersion = D934AA7B2DA971CB00858E86 /* Model.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
+			path = Scenti.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

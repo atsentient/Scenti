@@ -6,11 +6,25 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct PerfumeListView: View {
+    @FetchRequest(
+        entity: CDPerfume.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \CDPerfume.createdAt, ascending: false)]
+    ) var perfumes: FetchedResults<CDPerfume>
+
     var body: some View {
-        
-        Text("BLEEHHHH!")
+        List {
+            ForEach(perfumes) { perfume in
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(perfume.name ?? "Unnamed")
+                    Text(perfume.brand ?? "No Brand")
+                    Text(perfume.notes ?? "No notes")
+                }
+                .padding(.vertical, 6)
+            }
+        }
     }
 }
 
