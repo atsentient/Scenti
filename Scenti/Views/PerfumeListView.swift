@@ -13,6 +13,8 @@ struct PerfumeListView: View {
         entity: CDPerfume.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \CDPerfume.createdAt, ascending: false)]
     ) var perfumes: FetchedResults<CDPerfume>
+    
+    @Environment(\.managedObjectContext) var moc
 
     var body: some View {
         List {
@@ -23,7 +25,22 @@ struct PerfumeListView: View {
                     Text(perfume.notes ?? "No notes")
                 }
                 .padding(.vertical, 6)
+                
             }
+            .onDelete(perform: removePerfume)
+        }
+    }
+    
+    func removePerfume(at offsets: IndexSet) {
+        for index in offsets {
+            let perfume = perfumes[index]
+            moc.delete(perfume)
+        }
+
+        do {
+            try moc.save()
+        } catch {
+            print("Delete error: \(error.localizedDescription)")
         }
     }
 }

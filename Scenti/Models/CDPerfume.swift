@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Perfume: Identifiable {
-    let id = UUID()
-    let name: String
-    let brand: String
-    let notes: String
-    let createdAt: Date
+struct Perfume: Identifiable, Codable {
+    var id = UUID()
+    var name: String
+    var brand: String
+    var notes: String
+    var createdAt: Date
 }

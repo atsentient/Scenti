@@ -17,6 +17,7 @@
 		D934AA7F2DA9724000858E86 /* PerfumeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA7E2DA9724000858E86 /* PerfumeListView.swift */; };
 		D934AA812DA9724C00858E86 /* AddPerfumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA802DA9724C00858E86 /* AddPerfumeView.swift */; };
 		D934AA832DA9876B00858E86 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA822DA9876B00858E86 /* Persistance.swift */; };
+		D9AA47C52DAB0FA50044871E /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AA47C42DAB0FA50044871E /* DetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		D934AA7E2DA9724000858E86 /* PerfumeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeListView.swift; sourceTree = "<group>"; };
 		D934AA802DA9724C00858E86 /* AddPerfumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPerfumeView.swift; sourceTree = "<group>"; };
 		D934AA822DA9876B00858E86 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		D9AA47C42DAB0FA50044871E /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			children = (
 				D934AA682DA9712800858E86 /* ContentView.swift */,
 				D934AA7E2DA9724000858E86 /* PerfumeListView.swift */,
+				D9AA47C42DAB0FA50044871E /* DetailsView.swift */,
 				D934AA802DA9724C00858E86 /* AddPerfumeView.swift */,
 			);
 			path = Views;
@@ -181,6 +184,7 @@
 			files = (
 				D934AA762DA9718800858E86 /* CDPerfume.swift in Sources */,
 				D934AA792DA971B600858E86 /* APIcode.swift in Sources */,
+				D9AA47C52DAB0FA50044871E /* DetailsView.swift in Sources */,
 				D934AA7C2DA971CB00858E86 /* Scenti.xcdatamodeld in Sources */,
 				D934AA692DA9712800858E86 /* ContentView.swift in Sources */,
 				D934AA812DA9724C00858E86 /* AddPerfumeView.swift in Sources */,
