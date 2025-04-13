@@ -11,13 +11,14 @@
 		D934AA692DA9712800858E86 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA682DA9712800858E86 /* ContentView.swift */; };
 		D934AA6B2DA9712900858E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D934AA6A2DA9712900858E86 /* Assets.xcassets */; };
 		D934AA6E2DA9712900858E86 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D934AA6D2DA9712900858E86 /* Preview Assets.xcassets */; };
-		D934AA762DA9718800858E86 /* CDPerfume.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA752DA9718800858E86 /* CDPerfume.swift */; };
+		D934AA762DA9718800858E86 /* CDPerfume+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA752DA9718800858E86 /* CDPerfume+Extension.swift */; };
 		D934AA792DA971B600858E86 /* APIcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA782DA971B600858E86 /* APIcode.swift */; };
 		D934AA7C2DA971CB00858E86 /* Scenti.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D934AA7A2DA971CB00858E86 /* Scenti.xcdatamodeld */; };
 		D934AA7F2DA9724000858E86 /* PerfumeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA7E2DA9724000858E86 /* PerfumeListView.swift */; };
 		D934AA812DA9724C00858E86 /* AddPerfumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA802DA9724C00858E86 /* AddPerfumeView.swift */; };
 		D934AA832DA9876B00858E86 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA822DA9876B00858E86 /* Persistance.swift */; };
 		D9AA47C52DAB0FA50044871E /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AA47C42DAB0FA50044871E /* DetailsView.swift */; };
+		D9AA47C72DAC3E980044871E /* Perfume.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AA47C62DAC3E980044871E /* Perfume.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,13 +27,14 @@
 		D934AA682DA9712800858E86 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D934AA6A2DA9712900858E86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D934AA6D2DA9712900858E86 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D934AA752DA9718800858E86 /* CDPerfume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDPerfume.swift; sourceTree = "<group>"; };
+		D934AA752DA9718800858E86 /* CDPerfume+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPerfume+Extension.swift"; sourceTree = "<group>"; };
 		D934AA782DA971B600858E86 /* APIcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIcode.swift; sourceTree = "<group>"; };
 		D934AA7B2DA971CB00858E86 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D934AA7E2DA9724000858E86 /* PerfumeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeListView.swift; sourceTree = "<group>"; };
 		D934AA802DA9724C00858E86 /* AddPerfumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPerfumeView.swift; sourceTree = "<group>"; };
 		D934AA822DA9876B00858E86 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
 		D9AA47C42DAB0FA50044871E /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		D9AA47C62DAC3E980044871E /* Perfume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Perfume.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				D934AA822DA9876B00858E86 /* Persistance.swift */,
-				D934AA752DA9718800858E86 /* CDPerfume.swift */,
+				D934AA752DA9718800858E86 /* CDPerfume+Extension.swift */,
+				D9AA47C62DAC3E980044871E /* Perfume.swift */,
 				D934AA7A2DA971CB00858E86 /* Scenti.xcdatamodeld */,
 			);
 			path = Models;
@@ -182,11 +185,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D934AA762DA9718800858E86 /* CDPerfume.swift in Sources */,
+				D934AA762DA9718800858E86 /* CDPerfume+Extension.swift in Sources */,
 				D934AA792DA971B600858E86 /* APIcode.swift in Sources */,
 				D9AA47C52DAB0FA50044871E /* DetailsView.swift in Sources */,
 				D934AA7C2DA971CB00858E86 /* Scenti.xcdatamodeld in Sources */,
 				D934AA692DA9712800858E86 /* ContentView.swift in Sources */,
+				D9AA47C72DAC3E980044871E /* Perfume.swift in Sources */,
 				D934AA812DA9724C00858E86 /* AddPerfumeView.swift in Sources */,
 				D934AA832DA9876B00858E86 /* Persistance.swift in Sources */,
 				D934AA672DA9712800858E86 /* ScentiApp.swift in Sources */,

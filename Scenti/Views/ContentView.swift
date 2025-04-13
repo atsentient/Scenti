@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
+    
     @State private var showingAddView = false
+    @State private var path: [Perfume] = []
 
     var body: some View {
-        NavigationStack {
-            PerfumeListView()
+        NavigationStack(path: $path) {
+            PerfumeListView(path: $path)
                 .navigationTitle("Scenti")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -26,11 +29,13 @@ struct ContentView: View {
                 .sheet(isPresented: $showingAddView) {
                     AddPerfumeView()
                 }
+                .navigationDestination(for: Perfume.self) { perfume in
+                    DetailsView(perfume: perfume)
+                }
         }
     }
 }
 
-    
 
 
 #Preview {

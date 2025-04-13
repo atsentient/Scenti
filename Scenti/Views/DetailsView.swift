@@ -10,13 +10,13 @@ import SwiftUI
 struct DetailsView: View {
     
     @Environment(\.managedObjectContext) var moc
-    @ObservedObject var perfume: CDPerfume
+    var perfume: Perfume
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(perfume.name ?? "Unnamed")
-            Text(perfume.brand ?? "No Brand")
-            Text(perfume.notes ?? "No notes")
+            Text(perfume.name )
+            Text(perfume.brand )
+            Text(perfume.notes )
         }
     }
 }

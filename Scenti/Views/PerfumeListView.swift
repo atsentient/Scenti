@@ -15,16 +15,22 @@ struct PerfumeListView: View {
     ) var perfumes: FetchedResults<CDPerfume>
     
     @Environment(\.managedObjectContext) var moc
+    @Binding var path: [Perfume]
 
     var body: some View {
         List {
             ForEach(perfumes) { perfume in
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(perfume.name ?? "Unnamed")
-                    Text(perfume.brand ?? "No Brand")
-                    Text(perfume.notes ?? "No notes")
+                Button {
+                    path.append(perfume.toModel())
+                } label: {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(perfume.name ?? "Unnamed")
+                        Text(perfume.brand ?? "No Brand")
+                        Text(perfume.notes ?? "No notes")
+                    }
+                    .padding(.vertical, 6)
+                    
                 }
-                .padding(.vertical, 6)
                 
             }
             .onDelete(perform: removePerfume)
@@ -43,8 +49,4 @@ struct PerfumeListView: View {
             print("Delete error: \(error.localizedDescription)")
         }
     }
-}
-
-#Preview {
-    PerfumeListView()
 }

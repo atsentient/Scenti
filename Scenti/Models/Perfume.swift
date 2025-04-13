@@ -1,13 +1,13 @@
 //
-//  Models.swift
+//  Perfume.swift
 //  Scenti
 //
-//  Created by Sasha Obraztsova on 11.04.2025.
+//  Created by Sasha Obraztsova on 13.04.2025.
 //
 
 import Foundation
 
-struct Perfume: Identifiable, Codable {
+struct Perfume: Identifiable, Codable, Hashable {
     var id = UUID()
     var name: String
     var brand: String
