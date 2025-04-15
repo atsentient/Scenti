@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
     
     @State private var showingAddView = false
-    @State private var path: [Perfume] = []
+    @State private var path: [CDPerfume] = []
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -29,7 +29,7 @@ struct ContentView: View {
                 .sheet(isPresented: $showingAddView) {
                     AddPerfumeView()
                 }
-                .navigationDestination(for: Perfume.self) { perfume in
+                .navigationDestination(for: CDPerfume.self) { perfume in
                     DetailsView(perfume: perfume)
                 }
         }

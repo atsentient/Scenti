@@ -15,13 +15,13 @@ struct PerfumeListView: View {
     ) var perfumes: FetchedResults<CDPerfume>
     
     @Environment(\.managedObjectContext) var moc
-    @Binding var path: [Perfume]
+    @Binding var path: [CDPerfume]
 
     var body: some View {
         List {
             ForEach(perfumes) { perfume in
                 Button {
-                    path.append(perfume.toModel())
+                    path.append(perfume)
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(perfume.name ?? "Unnamed")
