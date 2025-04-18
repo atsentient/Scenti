@@ -8,63 +8,65 @@
 import SwiftUI
 
 struct DetailsView: View {
-    
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var perfume: CDPerfume
     @Environment(\.editMode) var editMode
-    
+
+    @State private var tempName: String = ""
+    @State private var tempBrand: String = ""
+    @State private var tempNotes: String = ""
+
     var body: some View {
         Form {
-            VStack(alignment: .leading, spacing: 4) {
-                Section(header: Text("Name")) {
-                    if editMode?.wrappedValue.isEditing == true {
-                        TextField("Name", text: Binding(
-                            get: { perfume.name ?? "" },
-                            set: { perfume.name = $0 }
-                        ))
-                    } else {
-                        Text(perfume.name ?? "No name")
-                    }
-                }
-                Section(header: Text("Brand")) {
-                    if editMode?.wrappedValue.isEditing == true {
-                        TextField("Brand", text: Binding(
-                            get: { perfume.brand ?? "" },
-                            set: { perfume.brand = $0 }
-                        ))
-                    } else {
-                        Text(perfume.brand ?? "No brand")
-                    }
-                }
-                Section(header: Text("Notes")) {
-                    if editMode?.wrappedValue.isEditing == true {
-                        TextField("Notes", text: Binding(
-                            get: { perfume.notes ?? "" },
-                            set: { perfume.notes = $0 }
-                        ))
-                    } else {
-                        Text(perfume.notes ?? "No notes")
-                    }
+            Section(header: Text("Name")) {
+                if editMode?.wrappedValue.isEditing == true {
+                    TextField("Name", text: $tempName)
+                } else {
+                    Text(perfume.name ?? "No name")
                 }
             }
+
+            Section(header: Text("Brand")) {
+                if editMode?.wrappedValue.isEditing == true {
+                    TextField("Brand", text: $tempBrand)
+                } else {
+                    Text(perfume.brand ?? "No brand")
+                }
+            }
+
+            Section(header: Text("Notes")) {
+                if editMode?.wrappedValue.isEditing == true {
+                    TextField("Notes", text: $tempNotes)
+                } else {
+                    Text(perfume.notes ?? "No notes")
+                }
+            }
+
             if editMode?.wrappedValue.isEditing == true {
                 Button("Save") {
+                    perfume.name = tempName
+                    perfume.brand = tempBrand
+                    perfume.notes = tempNotes
                     do {
                         try moc.save()
+                        withAnimation {
+                            editMode?.wrappedValue = .inactive
+                        }
                     } catch {
                         print("Save error: \(error)")
                     }
                 }
             }
-            
         }
         .navigationTitle("Details")
         .toolbar {
             EditButton()
         }
-        
+        .onAppear {
+            tempName = perfume.name ?? ""
+            tempBrand = perfume.brand ?? ""
+            tempNotes = perfume.notes ?? ""
+        }
     }
-        
 }
-
 
