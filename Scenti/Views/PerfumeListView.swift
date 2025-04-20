@@ -9,14 +9,30 @@ import SwiftUI
 import CoreData
 
 struct PerfumeListView: View {
-    @FetchRequest(
-        entity: CDPerfume.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \CDPerfume.createdAt, ascending: false)]
-    ) var perfumes: FetchedResults<CDPerfume>
+    
+    @Binding var path: [CDPerfume]
+    var searchText: String
     
     @Environment(\.managedObjectContext) var moc
-    @Binding var path: [CDPerfume]
-
+    @FetchRequest var perfumes: FetchedResults<CDPerfume>
+    
+    init(path: Binding<[CDPerfume]>, searchText: String) {
+        _path = path
+        self.searchText = searchText
+        
+        let request: NSFetchRequest<CDPerfume> = CDPerfume.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \CDPerfume.createdAt, ascending: false)]
+        
+        if !searchText.isEmpty {
+            request.predicate = NSPredicate(
+                format: "name CONTAINS[cd] %@ OR brand CONTAINS[cd] %@ OR notes CONTAINS[cd] %@",
+                searchText, searchText, searchText
+            )
+        }
+        
+        _perfumes = FetchRequest(fetchRequest: request)
+    }
+    
     var body: some View {
         List {
             ForEach(perfumes) { perfume in
@@ -34,15 +50,17 @@ struct PerfumeListView: View {
                 
             }
             .onDelete(perform: removePerfume)
+            
         }
     }
+    
     
     func removePerfume(at offsets: IndexSet) {
         for index in offsets {
             let perfume = perfumes[index]
             moc.delete(perfume)
         }
-
+        
         do {
             try moc.save()
         } catch {
