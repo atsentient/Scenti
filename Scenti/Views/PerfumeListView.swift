@@ -40,9 +40,19 @@ struct PerfumeListView: View {
                     path.append(perfume)
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(perfume.name ?? "Unnamed")
                         Text(perfume.brand ?? "No Brand")
+                            .foregroundStyle(.black)
+                        Text(perfume.name ?? "Unnamed")
                         Text(perfume.notes ?? "No notes")
+                            .foregroundStyle(.brown)
+                        Button {
+                            perfume.favourite.toggle()
+                            try? moc.save()
+                        } label: {
+                            Image(systemName: perfume.favourite ? "star.fill" : "star")
+                                .foregroundColor(.yellow)
+                        }
+                        .buttonStyle(.plain)
                     }
                     .padding(.vertical, 6)
                     

@@ -7,19 +7,27 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct AddPerfumeView: View {
     @Environment(\.managedObjectContext) private var moc
-       @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
 
-       @State private var name = ""
-       @State private var brand = ""
-       @State private var notes = ""
+    @State private var name = ""
+    @State private var brand = ""
+    @State private var notes = ""
+
+    @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var selectedImageData: Data? = nil
 
     var body: some View {
         TextField("brand", text: $brand)
         TextField("name", text: $name)
         TextField("notes", text: $notes)
+        PhotosPicker(selection: $selectedItem,
+                     matching: .any(of: [.images, .not(.screenshots)])) {
+            Text("Select perfume photo")
+        }
         saveButtonSection
     }
     

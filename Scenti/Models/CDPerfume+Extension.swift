@@ -14,7 +14,8 @@ extension CDPerfume {
             name: self.name ?? "Unnamed",
             brand: self.brand ?? "No Brand",
             notes: self.notes ?? "No notes",
-            createdAt: self.createdAt ?? Date()
+            createdAt: self.createdAt ?? Date(), 
+            favourite: self.favourite
         )
     }
 }
