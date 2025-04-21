@@ -14,4 +14,5 @@ struct Perfume: Identifiable, Codable, Hashable {
     var notes: String
     var createdAt: Date
     var favourite: Bool
+    var imageData: Data?
 }

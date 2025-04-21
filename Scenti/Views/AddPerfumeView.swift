@@ -12,21 +12,20 @@ import PhotosUI
 struct AddPerfumeView: View {
     @Environment(\.managedObjectContext) private var moc
     @Environment(\.dismiss) private var dismiss
-
+    
     @State private var name = ""
     @State private var brand = ""
     @State private var notes = ""
-
-    @State private var selectedItem: PhotosPickerItem? = nil
+    
+    @State private var selectedPhoto: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
-
+    
     var body: some View {
         TextField("brand", text: $brand)
         TextField("name", text: $name)
         TextField("notes", text: $notes)
-        PhotosPicker(selection: $selectedItem,
-                     matching: .any(of: [.images, .not(.screenshots)])) {
-            Text("Select perfume photo")
+        Section {
+            imagePickerSection
         }
         saveButtonSection
     }
@@ -41,6 +40,33 @@ struct AddPerfumeView: View {
         }
     }
     
+    @ViewBuilder
+    private var imagePickerSection: some View {
+        PhotosPicker("Select photo", selection: $selectedPhoto, matching: .images)
+            .onChange(of: selectedPhoto) { newItem in
+                Task {
+                    if let newItem {
+                        if let data = try? await newItem.loadTransferable(type: Data.self) {
+                            selectedImageData = data
+                        }
+                    }
+                }
+            }
+
+        if let imageData = selectedImageData,
+           let uiImage = UIImage(data: imageData) {
+            Image(uiImage: uiImage)
+                .resizable()
+                            .scaledToFit()
+                            .frame(height: 200)
+                            .cornerRadius(12)
+                            .padding(.vertical, 8)
+        }
+    }
+
+
+    
+    
     private func savePerfume() {
         let newPerfume = CDPerfume(context: moc)
         newPerfume.id = UUID()
@@ -48,6 +74,7 @@ struct AddPerfumeView: View {
         newPerfume.brand = brand
         newPerfume.notes = notes
         newPerfume.createdAt = Date()
+        newPerfume.imageData = selectedImageData
         print(
             "ID: \(newPerfume.id?.uuidString ?? "nil")",
             "Name: \(newPerfume.name ?? "nil")",
@@ -55,16 +82,19 @@ struct AddPerfumeView: View {
             "Notes: \(newPerfume.notes ?? "nil")",
             "Created: \(newPerfume.createdAt?.description ?? "nil")"
         )
-
+        
         do {
             try moc.save()
             dismiss()
         } catch {
             print("Failed to save perfume: \(error.localizedDescription)")
         }
-
+        
     }
 }
+
+
+
 
 #Preview {
     AddPerfumeView()
