@@ -16,7 +16,8 @@ extension CDPerfume {
             notes: self.notes ?? "No notes",
             createdAt: self.createdAt ?? Date(), 
             favourite: self.favourite,
-            imageData: self.imageData
+            imageData: self.imageData,
+            tags: (self.tags ?? [] as NSObject as! Array<String>) 
         )
     }
 }

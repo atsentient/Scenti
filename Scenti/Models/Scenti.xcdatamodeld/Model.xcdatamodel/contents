@@ -8,5 +8,6 @@
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="tags" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;"/>
     </entity>
 </model>
