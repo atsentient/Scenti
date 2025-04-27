@@ -135,14 +135,6 @@ struct TagsEditorView: View {
 
 struct TagsDisplayView: View {
     let tags: [String]
-
-    var body: some View {
-        WrapTagsView(tags: tags)
-    }
-}
-
-struct WrapTagsView: View {
-    let tags: [String]
     let columns = [GridItem(.adaptive(minimum: 80), spacing: 8)]
 
     var body: some View {
