@@ -15,7 +15,9 @@ struct ContentView: View {
     @State private var showingAddView = false
     @State private var path: [CDPerfume] = []
     @State private var searchText: String = ""
-
+    @State private var showingFilterViewActive = false
+    @State private var selectedTags: Set<String> = []
+    
     var body: some View {
         NavigationStack(path: $path) {
             PerfumeListView(path: $path, searchText: searchText)
@@ -27,6 +29,11 @@ struct ContentView: View {
                             showingAddView = true
                         } label: {
                             Image(systemName: "plus")
+                        }
+                        Button {
+                            showingFilterViewActive = true
+                        } label: {
+                            Image(systemName: showingFilterViewActive ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                         }
                     }
                 }
