@@ -14,6 +14,15 @@ struct FilterView: View {
     @Binding var selectedTags: Set<String>
     
     var body: some View {
+        VStack {
+            if !selectedTags.isEmpty {
+                Button("Clear") {
+                    selectedTags.removeAll()
+                }
+                .padding(.top, 8)
+                .foregroundColor(.red)
+            }
+        }
         List {
             ForEach(perfumeNoteTags, id: \.self) { tag in
                 Text(tag)

@@ -15,10 +15,12 @@ struct PerfumeListView: View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest var perfumes: FetchedResults<CDPerfume>
+    var selectedTags: Set<String>
     
-    init(path: Binding<[CDPerfume]>, searchText: String) {
+    init(path: Binding<[CDPerfume]>, searchText: String, selectedTags: Set<String>) {
         _path = path
         self.searchText = searchText
+        self.selectedTags = selectedTags
         
         let request: NSFetchRequest<CDPerfume> = CDPerfume.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \CDPerfume.createdAt, ascending: false)]
@@ -40,22 +42,23 @@ struct PerfumeListView: View {
                     path.append(perfume)
                 } label: {
                     HStack{
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(perfume.brand ?? "No Brand")
-                                .foregroundStyle(.black)
-                            Text(perfume.name ?? "Unnamed")
-                            Text(perfume.notes ?? "No notes")
-                                .foregroundStyle(.brown)
-                            TagsView(tags: perfume.tags ?? [])
-                            Button {
-                                        perfume.favourite.toggle()
-                                        try? moc.save()
-                                    } label: {
-                                        Image(systemName: perfume.favourite ? "star.fill" : "star")
-                                            .foregroundColor(.yellow)
-                                    }
-                                    .buttonStyle(.plain)
-                        }
+                        if selectedTags.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(perfume.brand ?? "No Brand")
+                                    .foregroundStyle(.black)
+                                Text(perfume.name ?? "Unnamed")
+                                Text(perfume.notes ?? "No notes")
+                                    .foregroundStyle(.brown)
+                                TagsView(tags: perfume.tags ?? [])
+                                Button {
+                                    perfume.favourite.toggle()
+                                    try? moc.save()
+                                } label: {
+                                    Image(systemName: perfume.favourite ? "star.fill" : "star")
+                                        .foregroundColor(.yellow)
+                                }
+                                .buttonStyle(.plain)
+                            }
                             if let imageData = perfume.imageData,
                                let uiImage = UIImage(data: imageData) {
                                 Image(uiImage: uiImage)
@@ -66,6 +69,38 @@ struct PerfumeListView: View {
                                     .cornerRadius(12)
                             }
                         }
+                        else if !selectedTags.isEmpty {
+                                let perfumeTags = Set(perfume.tags ?? [])
+                                if selectedTags.isSubset(of: perfumeTags) {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(perfume.brand ?? "No Brand")
+                                            .foregroundStyle(.black)
+                                        Text(perfume.name ?? "Unnamed")
+                                        Text(perfume.notes ?? "No notes")
+                                            .foregroundStyle(.brown)
+                                        TagsView(tags: perfume.tags ?? [])
+                                        Button {
+                                            perfume.favourite.toggle()
+                                            try? moc.save()
+                                        } label: {
+                                            Image(systemName: perfume.favourite ? "star.fill" : "star")
+                                                .foregroundColor(.yellow)
+                                        }
+                                        .buttonStyle(.plain)
+                                    }
+                                    if let imageData = perfume.imageData,
+                                       let uiImage = UIImage(data: imageData) {
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100, height: 100)
+                                            .clipped()
+                                            .cornerRadius(12)
+                                    }
+                                }
+
+                        }
+                    }
                         .padding(.vertical, 6)
                     }
                     

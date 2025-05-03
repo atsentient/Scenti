@@ -20,7 +20,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            PerfumeListView(path: $path, searchText: searchText)
+            PerfumeListView(path: $path, searchText: searchText, selectedTags: selectedTags)
                 .searchable(text: $searchText)
                 .navigationTitle("Scenti")
                 .toolbar {
@@ -30,19 +30,24 @@ struct ContentView: View {
                         } label: {
                             Image(systemName: "plus")
                         }
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             showingFilterViewActive = true
                         } label: {
                             Image(systemName: showingFilterViewActive ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                         }
                     }
-                }
-                .sheet(isPresented: $showingAddView) {
+                }                .sheet(isPresented: $showingAddView) {
                     AddPerfumeView()
                         .environment(\.managedObjectContext, moc)
                 }
                 .navigationDestination(for: CDPerfume.self) { perfume in
                     DetailsView(perfume: perfume)
+                }
+                .sheet(isPresented: $showingFilterViewActive) {
+                    FilterView(selectedTags: $selectedTags)
                 }
         }
     }
