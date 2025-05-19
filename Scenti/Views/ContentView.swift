@@ -18,9 +18,16 @@ struct ContentView: View {
     @State private var showingFilterViewActive = false
     @State private var selectedTags: Set<String> = []
     
+    @StateObject private var viewModel: PerfumeListViewModel
+        
+        init() {
+            let moc = PersistenceController.shared.container.viewContext
+            _viewModel = StateObject(wrappedValue: PerfumeListViewModel(moc: moc))
+        }
+    
     var body: some View {
         NavigationStack(path: $path) {
-            PerfumeListView(path: $path, searchText: searchText, selectedTags: selectedTags)
+            PerfumeListView(path: $path, viewModel: viewModel)
                 .searchable(text: $searchText)
                 .navigationTitle("Scenti")
                 .toolbar {

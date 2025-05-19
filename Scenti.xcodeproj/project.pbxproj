@@ -21,6 +21,7 @@
 		D9AA47C72DAC3E980044871E /* Perfume.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AA47C62DAC3E980044871E /* Perfume.swift */; };
 		D9AAA2662DC38E4C0020ACEC /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAA2652DC38E4C0020ACEC /* FilterView.swift */; };
 		D9AAA2682DC394F30020ACEC /* TagConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAA2672DC394F30020ACEC /* TagConstants.swift */; };
+		D9ADD3382DCA70C40009F71C /* PerfumeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADD3372DCA70C40009F71C /* PerfumeListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		D9AA47C62DAC3E980044871E /* Perfume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Perfume.swift; sourceTree = "<group>"; };
 		D9AAA2652DC38E4C0020ACEC /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		D9AAA2672DC394F30020ACEC /* TagConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagConstants.swift; sourceTree = "<group>"; };
+		D9ADD3372DCA70C40009F71C /* PerfumeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		D934AA7D2DA9722000858E86 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D9ADD3372DCA70C40009F71C /* PerfumeListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				D934AA7C2DA971CB00858E86 /* Scenti.xcdatamodeld in Sources */,
 				D934AA692DA9712800858E86 /* ContentView.swift in Sources */,
 				D9AA47C72DAC3E980044871E /* Perfume.swift in Sources */,
+				D9ADD3382DCA70C40009F71C /* PerfumeListViewModel.swift in Sources */,
 				D934AA812DA9724C00858E86 /* AddPerfumeView.swift in Sources */,
 				D934AA832DA9876B00858E86 /* Persistance.swift in Sources */,
 				D934AA672DA9712800858E86 /* ScentiApp.swift in Sources */,
