@@ -7,20 +7,38 @@
 
 import CoreData
 import SwiftUI
+import Combine
 
 class PerfumeListViewModel: ObservableObject {
     @Published var perfumes: [CDPerfume] = []
     @Published var searchText: String = ""
     @Published var selectedTags: Set<String> = []
     
-    private let moc: NSManagedObjectContext
+    private var cancellables = Set<AnyCancellable>()
+    
+    private var moc: NSManagedObjectContext
     
     init(moc: NSManagedObjectContext) {
         self.moc = moc
         fetchPerfumes()
+        setupCoreDataObserver()
     }
     
+    let request = CDPerfume.fetchRequest()
+    
+    private func setupCoreDataObserver() {
+            NotificationCenter.default
+                .publisher(for: .NSManagedObjectContextDidSave, object: moc)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] _ in
+                    self?.fetchPerfumes()
+                    print("🟢 Данные Core Data изменились - список обновлён")
+                }
+                .store(in: &cancellables)
+        }
+    
     func fetchPerfumes() {
+        print("🔵 Запущен fetchPerfumes()")
         let request = CDPerfume.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \CDPerfume.createdAt, ascending: false)]
         
@@ -36,6 +54,8 @@ class PerfumeListViewModel: ObservableObject {
         } catch {
             print("Ошибка загрузки: \(error)")
         }
+        
+        print("🟢 Загружено парфюмов: \(perfumes.count)")
     }
     
     func toggleFavourite(for perfume: CDPerfume) {
@@ -43,8 +63,8 @@ class PerfumeListViewModel: ObservableObject {
         
         do {
             try moc.save()
-            print("Favourite status saved: \(perfume.favourite)") // Отладочный вывод
-            objectWillChange.send() // Принудительное обновление
+            print("Favourite status saved: \(perfume.favourite)") 
+            objectWillChange.send()
         } catch {
             print("Error saving favourite: \(error.localizedDescription)")
         }
@@ -54,7 +74,7 @@ class PerfumeListViewModel: ObservableObject {
         guard perfumes.indices.contains(index) else { return }
         moc.delete(perfumes[index])
         saveContext()
-        fetchPerfumes() // Обновляем список
+        fetchPerfumes()
     }
     
     private func saveContext() {

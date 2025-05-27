@@ -28,6 +28,13 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $path) {
             PerfumeListView(path: $path, viewModel: viewModel)
+                .sheet(isPresented: $showingAddView) {
+                    AddPerfumeView(
+                        addPerfumeVM: AddPerfumeVM(moc: moc),
+                        onSave: { viewModel.fetchPerfumes() } // Обновляем список
+                    )
+                    .environment(\.managedObjectContext, moc)
+                }
                 .searchable(text: $searchText)
                 .navigationTitle("Scenti")
                 .toolbar {
@@ -47,11 +54,13 @@ struct ContentView: View {
                         }
                     }
                 }                .sheet(isPresented: $showingAddView) {
-                    AddPerfumeView()
+                    AddPerfumeView(addPerfumeVM: AddPerfumeVM(moc: moc))
                         .environment(\.managedObjectContext, moc)
                 }
                 .navigationDestination(for: CDPerfume.self) { perfume in
-                    DetailsView(perfume: perfume)
+                    DetailsView(
+                        detailsViewModel: DetailsViewModel(moc: moc, perfume: perfume)
+                        )
                 }
                 .sheet(isPresented: $showingFilterViewActive) {
                     FilterView(selectedTags: $selectedTags)

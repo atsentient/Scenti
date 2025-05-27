@@ -9,10 +9,10 @@ import SwiftUI
 import CoreData
 
 struct PerfumeListView: View {
-    
     @Binding var path: [CDPerfume]
     @StateObject var viewModel: PerfumeListViewModel
     @Environment(\.managedObjectContext) var moc
+    @State private var showAddPerfumeView = false
     
     var body: some View {
         List {
@@ -21,7 +21,6 @@ struct PerfumeListView: View {
                     path.append(perfume)
                 } label: {
                     HStack{
-                            
                         PerfumeRowView(
                             perfume: perfume,
                             onFavouriteTap: {
@@ -46,10 +45,10 @@ struct PerfumeListView: View {
                 }
                 .onDelete { offsets in
                             offsets.forEach { viewModel.removePerfume(at: $0) }
-                        }
-                
             }
+        }
     }
+    
     
     struct TagsView: View {
         var tags: [String]
@@ -72,6 +71,7 @@ struct PerfumeListView: View {
         let onFavouriteTap: () -> Void
         
         var body: some View {
+           
             HStack {
                 VStack(alignment: .leading) {
                     Text(perfume.brand ?? "")

@@ -8,68 +8,54 @@
 import SwiftUI
 
 struct DetailsView: View {
+    
     @Environment(\.managedObjectContext) var moc
-    @ObservedObject var perfume: CDPerfume
     @Environment(\.editMode) var editMode
 
-    @State private var tempName: String = ""
-    @State private var tempBrand: String = ""
-    @State private var tempNotes: String = ""
-
     @State private var selectedNotesTags: Set<String> = []
+    
+    @StateObject var detailsViewModel: DetailsViewModel
 
     var body: some View {
         List {
             Section(header: Text("Name")) {
                 if editMode?.wrappedValue.isEditing == true {
-                    TextField("Name", text: $tempName)
+                    TextField("Name", text: $detailsViewModel.tempName)
                 } else {
-                    Text(perfume.name ?? "No name")
+                    Text(detailsViewModel.perfume.name ?? "No name")
                 }
             }
 
             Section(header: Text("Brand")) {
                 if editMode?.wrappedValue.isEditing == true {
-                    TextField("Brand", text: $tempBrand)
+                    TextField("Brand", text: $detailsViewModel.tempBrand)
                 } else {
-                    Text(perfume.brand ?? "No brand")
+                    Text(detailsViewModel.perfume.brand ?? "No brand")
                 }
             }
 
             Section(header: Text("Notes")) {
                 if editMode?.wrappedValue.isEditing == true {
-                    TextEditor(text: $tempNotes)
+                    TextEditor(text: $detailsViewModel.tempNotes)
                         .frame(height: 100)
                 } else {
-                    Text(perfume.notes ?? "No notes")
+                    Text(detailsViewModel.perfume.notes ?? "No notes")
                 }
             }
 
             Section(header: Text("Tags")) {
                 if editMode?.wrappedValue.isEditing == true {
-                    TagsEditorView(allTags: perfumeNoteTags, selectedTags: $selectedNotesTags)
+                    TagsEditorView(allTags: perfumeNoteTags, selectedTags: $detailsViewModel.selectedNotesTags)
                 } else {
-                    if let tags = perfume.tags, !tags.isEmpty {
+                    if let tags = detailsViewModel.perfume.tags, !tags.isEmpty {
                     TagsDisplayView(tags: tags)
                 }
             }
         }
 
             if editMode?.wrappedValue.isEditing == true {
-                Button("Save") {
-                    perfume.name = tempName
-                    perfume.brand = tempBrand
-                    perfume.notes = tempNotes
-                    perfume.tags = Array(selectedNotesTags)
-
-                    do {
-                        try moc.save()
-                        withAnimation {
-                            editMode?.wrappedValue = .inactive
-                        }
-                    } catch {
-                        print("Save error: \(error)")
-                    }
+                Button("Save"){
+                    detailsViewModel.saveDetails()
                 }
             }
         }
@@ -78,10 +64,10 @@ struct DetailsView: View {
             EditButton()
         }
         .onAppear {
-            tempName = perfume.name ?? ""
-            tempBrand = perfume.brand ?? ""
-            tempNotes = perfume.notes ?? ""
-            if let tagArray = perfume.tags {
+            detailsViewModel.tempName = detailsViewModel.perfume.name ?? ""
+            detailsViewModel.tempBrand = detailsViewModel.perfume.brand ?? ""
+            detailsViewModel.tempNotes = detailsViewModel.perfume.notes ?? ""
+            if let tagArray = detailsViewModel.perfume.tags {
                 selectedNotesTags = Set(tagArray)
             } else {
                 selectedNotesTags = []
