@@ -10,7 +10,7 @@ import CoreData
 
 struct PerfumeListView: View {
     @Binding var path: [CDPerfume]
-    @StateObject var viewModel: PerfumeListViewModel
+    @ObservedObject var viewModel: PerfumeListViewModel
     @Environment(\.managedObjectContext) var moc
     @State private var showAddPerfumeView = false
     

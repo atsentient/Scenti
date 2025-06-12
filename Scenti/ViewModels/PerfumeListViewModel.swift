@@ -93,8 +93,8 @@ extension PerfumeListViewModel {
         }
         
         return perfumes.filter { perfume in
-            let perfumeTags = Set(perfume.tags ?? [])
-            return selectedTags.isSubset(of: perfumeTags)
+            guard let perfumeTags = perfume.tags else { return false }
+            return selectedTags.isSubset(of: Set(perfumeTags))
         }
     }
 }

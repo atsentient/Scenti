@@ -63,7 +63,10 @@ struct ContentView: View {
                         )
                 }
                 .sheet(isPresented: $showingFilterViewActive) {
-                    FilterView(selectedTags: $selectedTags)
+                    FilterView(selectedTags: $viewModel.selectedTags)
+                }
+                .onChange(of: viewModel.selectedTags) { _ in
+                    viewModel.fetchPerfumes()
                 }
         }
     }
