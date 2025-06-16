@@ -9,5 +9,14 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="tags" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;"/>
+        <relationship name="userProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUserProfile" inverseName="favouritePerfumes" inverseEntity="CDUserProfile"/>
+    </entity>
+    <entity name="CDUserProfile" representedClassName="CDUserProfile" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="joinDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="preferences" optional="YES" attributeType="String"/>
+        <attribute name="profilePicture" optional="YES" attributeType="Binary"/>
+        <relationship name="favouritePerfumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPerfume" inverseName="userProfile" inverseEntity="CDPerfume"/>
     </entity>
 </model>
