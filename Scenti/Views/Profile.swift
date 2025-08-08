@@ -19,8 +19,19 @@ struct Profile: View {
         profiles.first ?? createDefaultProfile()
     }
     
+    @StateObject var profileVM: ProfileVM
+    @Environment(\.editMode) var editMode
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section(header: Text("Username")) {
+                if editMode?.wrappedValue.isEditing == true {
+                    TextField("Name", text: $profileVM.tempUsername)
+                } else {
+                    Text(profileVM.user.name ?? "No name")
+                }
+            }
+        }
     }
     
     private func createDefaultProfile() -> CDUserProfile {
@@ -34,6 +45,3 @@ struct Profile: View {
     
 }
 
-#Preview {
-    Profile()
-}

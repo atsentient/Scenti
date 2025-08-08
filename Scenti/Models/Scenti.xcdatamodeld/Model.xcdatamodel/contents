@@ -15,7 +15,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="joinDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="preferences" optional="YES" attributeType="String"/>
+        <attribute name="preferences" optional="YES" attributeType="Transformable" valueTransformerName="PreferenceTransformer"/>
         <attribute name="profilePicture" optional="YES" attributeType="Binary"/>
         <relationship name="favouritePerfumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPerfume" inverseName="userProfile" inverseEntity="CDPerfume"/>
     </entity>

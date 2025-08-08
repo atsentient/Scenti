@@ -14,16 +14,16 @@ class AddPerfumeVM: ObservableObject {
     
     private let moc: NSManagedObjectContext
     
+    init(moc: NSManagedObjectContext) {
+            self.moc = moc
+    }
+    
     @Published var selectedNotesTags: Set<String> = []
     @Published var selectedPhoto: PhotosPickerItem? = nil
     @Published var selectedImageData: Data? = nil
     @Published var name = ""
     @Published var brand = ""
     @Published var notes = ""
-    
-    init(moc: NSManagedObjectContext) {
-            self.moc = moc
-    }
     
     func savePerfume() {
         print("🔵 Начало сохранения парфюма")
