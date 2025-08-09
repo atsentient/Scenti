@@ -9,15 +9,24 @@ import SwiftUI
 
 @main
 struct ScentiApp: App {
-    
     let persistenceController = PersistenceController.shared
-    @Environment(\.scenePhase) var scenePhase
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                        
+            SwiftUI.TabView {
+                ContentView()
+                    .tabItem {
+                        Image(systemName: "bottles.fill")
+                        Text("Collection")
+                    }
+                
+                Profile()
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Profile")
+                    }
+            }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

@@ -31,12 +31,12 @@ struct ContentView: View {
                 .sheet(isPresented: $showingAddView) {
                     AddPerfumeView(
                         addPerfumeVM: AddPerfumeVM(moc: moc),
-                        onSave: { viewModel.fetchPerfumes() } // Обновляем список
+                        onSave: { viewModel.fetchPerfumes() } 
                     )
                     .environment(\.managedObjectContext, moc)
                 }
                 .searchable(text: $searchText)
-                .navigationTitle("Scenti")
+                .navigationTitle("My Collection")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {

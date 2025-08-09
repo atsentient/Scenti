@@ -14,31 +14,34 @@ struct FilterView: View {
     @Binding var selectedTags: Set<String>
     
     var body: some View {
-        VStack {
-            if !selectedTags.isEmpty {
-                Button("Clear") {
-                    selectedTags.removeAll()
+        NavigationView {
+            VStack {
+                if !selectedTags.isEmpty {
+                    Button("Clear All") {
+                        selectedTags.removeAll()
+                    }
+                    .foregroundColor(.red)
+                    .padding(.top)
                 }
-                .padding(.top, 8)
-                .foregroundColor(.red)
-            }
-        }
-        List {
-            ForEach(perfumeNoteTags, id: \.self) { tag in
-                Text(tag)
-                    .background(selectedTags.contains(tag) ? Color.purple.opacity(0.8) : Color.gray.opacity(0.2))
-                    .foregroundColor(selectedTags.contains(tag) ? .white : .black)
-                    .onTapGesture {
-                        toggleTag(tag)
+                List {
+                    ForEach(perfumeNoteTags, id: \.self) { tag in
+                        Text(tag)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(selectedTags.contains(tag) ? Color.blue : Color.gray.opacity(0.3))
+                            .cornerRadius(20)
+                            .onTapGesture { toggleTag(tag) }
                     }
+                  }
+                }
+                .navigationTitle("Filter Perfumes")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Done") { dismiss() }
+                    }
+                }
             }
-            .padding()
-        }
         
-        Button(selectedTags.isEmpty ? "Close" : "Search") {
-                        dismiss()
-                    }
-                
     }
     
     private func toggleTag(_ tag: String) {

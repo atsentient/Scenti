@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D91E1F7C2E03180200115069 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91E1F7B2E03180200115069 /* ProfileVM.swift */; };
+		D92B94732E4768F0001308B7 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92B94722E4768F0001308B7 /* TabView.swift */; };
 		D934AA672DA9712800858E86 /* ScentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA662DA9712800858E86 /* ScentiApp.swift */; };
 		D934AA692DA9712800858E86 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D934AA682DA9712800858E86 /* ContentView.swift */; };
 		D934AA6B2DA9712900858E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D934AA6A2DA9712900858E86 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		D91E1F7B2E03180200115069 /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
+		D92B94722E4768F0001308B7 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		D934AA632DA9712800858E86 /* Scenti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scenti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D934AA662DA9712800858E86 /* ScentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScentiApp.swift; sourceTree = "<group>"; };
 		D934AA682DA9712800858E86 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				D934AA682DA9712800858E86 /* ContentView.swift */,
 				D9816ACB2DEF7E8300DA771B /* Profile.swift */,
+				D92B94722E4768F0001308B7 /* TabView.swift */,
 				D9AAA2652DC38E4C0020ACEC /* FilterView.swift */,
 				D934AA7E2DA9724000858E86 /* PerfumeListView.swift */,
 				D9AA47C42DAB0FA50044871E /* DetailsView.swift */,
@@ -222,6 +225,7 @@
 				D98401CA2DDD0510003D3817 /* DetailsViewModel.swift in Sources */,
 				D9AAA2682DC394F30020ACEC /* TagConstants.swift in Sources */,
 				D934AA7F2DA9724000858E86 /* PerfumeListView.swift in Sources */,
+				D92B94732E4768F0001308B7 /* TabView.swift in Sources */,
 				D91E1F7C2E03180200115069 /* ProfileVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
