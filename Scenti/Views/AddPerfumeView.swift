@@ -16,26 +16,46 @@ struct AddPerfumeView: View {
     var onSave: (() -> Void)?
     
     var body: some View {
-        TextField("brand", text: $addPerfumeVM.brand)
-        TextField("name", text: $addPerfumeVM.name)
-        TextField("notes", text: $addPerfumeVM.notes)
-        Section {
-            imagePickerSection
-        }
-        saveButtonSection
-    }
-    
-    private var saveButtonSection: some View {
-        HStack {
-            Spacer()
-            Button("Save") {
-                addPerfumeVM.savePerfume()
-                onSave?()
-                dismiss()
+        NavigationStack {
+            
+            Form {
+                
+                Section("Perfume Details") {
+                    TextField("Brand", text: $addPerfumeVM.brand)
+                    TextField("Name", text: $addPerfumeVM.name)
+                    TextField("Notes", text: $addPerfumeVM.notes, axis: .vertical)
+                        .lineLimit(3...6)
+                }
+                
+                Section("Photo") {
+                    imagePickerSection
+                }
+                
+                Section {
+                    Button("Save") {
+                        addPerfumeVM.savePerfume()
+                        onSave?()
+                        dismiss()
+                    }
+                    .disabled(addPerfumeVM.brand.isEmpty || addPerfumeVM.name.isEmpty)
+                    .frame(maxWidth: .infinity)
+                    
+                }
+                
             }
-            Spacer()
+            .navigationTitle("Add Perfume")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
+            
         }
     }
+
     
     @ViewBuilder
     private var imagePickerSection: some View {
