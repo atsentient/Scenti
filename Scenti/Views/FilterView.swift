@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct FilterView: View {
-    
-    @Environment(\.managedObjectContext) var moc
+
     @Environment(\.dismiss) var dismiss
     @Binding var selectedTags: Set<String>
     

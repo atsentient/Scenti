@@ -9,9 +9,9 @@ import SwiftUI
 import CoreData
 
 struct PerfumeListView: View {
+    
     @Binding var path: [CDPerfume]
     @ObservedObject var viewModel: PerfumeListViewModel
-    @Environment(\.managedObjectContext) var moc
     @State private var showAddPerfumeView = false
     
     var body: some View {

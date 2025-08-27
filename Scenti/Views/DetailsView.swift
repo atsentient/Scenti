@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct DetailsView: View {
-    
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.editMode) var editMode
 
-    @State private var selectedNotesTags: Set<String> = []
+    @Environment(\.editMode) var editMode
     
     @StateObject var detailsViewModel: DetailsViewModel
 

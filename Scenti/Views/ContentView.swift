@@ -14,9 +14,8 @@ struct ContentView: View {
 
     @State private var showingAddView = false
     @State private var path: [CDPerfume] = []
-    @State private var searchText: String = ""
     @State private var showingFilterViewActive = false
-    @State private var selectedTags: Set<String> = []
+    @State private var searchText: String = ""
     
     @StateObject private var viewModel: PerfumeListViewModel
         

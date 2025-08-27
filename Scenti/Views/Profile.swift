@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct Profile: View {
-    @Environment(\.managedObjectContext) private var moc
-    @Environment(\.editMode) var editMode
-    @State private var editMode: EditMode = .inactive
     
     @FetchRequest(
         entity: CDUserProfile.entity(),
@@ -18,18 +15,17 @@ struct Profile: View {
     ) var profiles: FetchedResults<CDUserProfile>
     
     private var currentProfile: CDUserProfile {
-            if let existingProfile = profiles.first {
-                return existingProfile
-            } else {
-                return createDefaultProfile()
-            }
+        if let existingProfile = profiles.first {
+            return existingProfile
+        } else {
+            return createDefaultProfile()
         }
+    }
     
     var body: some View {
         NavigationStack {
             ProfileContentView(
                 profileVM: ProfileVM(moc: moc, user: currentProfile)
-                    .environment(\.editMode, $editMode)
             )
         }
     }
@@ -42,11 +38,10 @@ struct Profile: View {
         try? moc.save()
         return newProfile
     }
-    
 }
 
 struct ProfileContentView: View {
-    @StateObject var profileVM: ProfileVM
+    @ObservedObject var profileVM: ProfileVM
     @Environment(\.editMode) var editMode
     
     var body: some View {
@@ -62,6 +57,7 @@ struct ProfileContentView: View {
             if editMode?.wrappedValue.isEditing == true {
                 Button("Save") {
                     profileVM.saveDetails()
+                    editMode?.wrappedValue = .inactive 
                 }
             }
         }
@@ -71,4 +67,3 @@ struct ProfileContentView: View {
         }
     }
 }
-

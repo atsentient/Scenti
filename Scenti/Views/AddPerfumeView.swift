@@ -10,7 +10,6 @@ import SwiftData
 import PhotosUI
 
 struct AddPerfumeView: View {
-    @Environment(\.managedObjectContext) private var moc
     @Environment(\.dismiss) private var dismiss
     @StateObject var addPerfumeVM: AddPerfumeVM
     var onSave: (() -> Void)?
