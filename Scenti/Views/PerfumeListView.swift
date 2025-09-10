@@ -67,7 +67,7 @@ struct PerfumeListView: View {
     }
 
     struct PerfumeRowView: View {
-        @ObservedObject var perfume: CDPerfume 
+        @ObservedObject var perfume: CDPerfume
         let onFavouriteTap: () -> Void
         
         var body: some View {

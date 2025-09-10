@@ -63,7 +63,7 @@ class PerfumeListViewModel: ObservableObject {
         
         do {
             try moc.save()
-            print("Favourite status saved: \(perfume.favourite)") 
+            print("Favourite status saved: \(perfume.favourite)")
             objectWillChange.send()
         } catch {
             print("Error saving favourite: \(error.localizedDescription)")

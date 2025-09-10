@@ -13,7 +13,7 @@ class DetailsViewModel: ObservableObject {
     @Published var tempName: String = ""
     @Published var tempBrand: String = ""
     @Published var tempNotes: String = ""
-    @Published var selectedNotesTags: Set<String> = [] 
+    @Published var selectedNotesTags: Set<String> = []
     
     private let moc: NSManagedObjectContext
     

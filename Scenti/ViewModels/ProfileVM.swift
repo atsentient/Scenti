@@ -27,15 +27,18 @@ class ProfileVM: ObservableObject {
     
     func saveDetails() {
         user.name = tempUsername
-        user.profilePicture = selectedProfilePictureData
+        
+        if let imageData = selectedProfilePictureData {
+            user.profilePicture = imageData
+        }
 
         do {
             try moc.save()
-        } catch {
-            print("Save error: \(error)")
+                print("✅ Profile saved")
+            } catch {
+                print("⛔️ Save error: \(error)")
         }
     }
-
-    
 }
+   
     

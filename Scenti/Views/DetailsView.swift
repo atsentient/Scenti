@@ -64,11 +64,11 @@ struct DetailsView: View {
             detailsViewModel.tempName = detailsViewModel.perfume.name ?? ""
             detailsViewModel.tempBrand = detailsViewModel.perfume.brand ?? ""
             detailsViewModel.tempNotes = detailsViewModel.perfume.notes ?? ""
-            if let tagArray = detailsViewModel.perfume.tags {
-                selectedNotesTags = Set(tagArray)
-            } else {
-                selectedNotesTags = []
-            }
+          //  if let tagArray = detailsViewModel.perfume.tags {
+         //       selectedNotesTags = Set(tagArray)
+         //   } else {
+           //     selectedNotesTags = []
+            //}
         }
     }
 }
@@ -121,5 +121,4 @@ struct TagsDisplayView: View {
         .padding(.vertical, 4)
     }
 }
-
 

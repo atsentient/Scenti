@@ -12,6 +12,7 @@
         <relationship name="userProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUserProfile" inverseName="favouritePerfumes" inverseEntity="CDUserProfile"/>
     </entity>
     <entity name="CDUserProfile" representedClassName="CDUserProfile" syncable="YES" codeGenerationType="class">
+        <attribute name="favoriteTags" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NSObject"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="joinDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>

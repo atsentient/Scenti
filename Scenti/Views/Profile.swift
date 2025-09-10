@@ -9,24 +9,32 @@ import SwiftUI
 
 struct Profile: View {
     
+    @State private var currentProfile: CDUserProfile?
+    @State private var editMode: EditMode = .inactive 
+    
+    @Environment(\.managedObjectContext) private var moc
+    
     @FetchRequest(
         entity: CDUserProfile.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \CDUserProfile.joinDate, ascending: false)]
     ) var profiles: FetchedResults<CDUserProfile>
-    
-    private var currentProfile: CDUserProfile {
-        if let existingProfile = profiles.first {
-            return existingProfile
-        } else {
-            return createDefaultProfile()
-        }
-    }
+
     
     var body: some View {
         NavigationStack {
-            ProfileContentView(
-                profileVM: ProfileVM(moc: moc, user: currentProfile)
-            )
+            if let profile = currentProfile {
+                ProfileContentView(profileVM: ProfileVM(moc: moc, user: profile))
+                    .environment(\.editMode, $editMode)
+            } else {
+                ProgressView()
+            }
+        }
+        .onAppear {
+            if let existingProfile = profiles.first {
+                currentProfile = existingProfile
+            } else {
+                currentProfile = createDefaultProfile()
+            }
         }
     }
     
@@ -35,7 +43,11 @@ struct Profile: View {
         newProfile.id = UUID()
         newProfile.name = "New user"
         newProfile.joinDate = Date()
-        try? moc.save()
+        do {
+            try moc.save()
+        } catch {
+            print("Save error creating default profile: \(error)")
+        }
         return newProfile
     }
 }
@@ -44,11 +56,14 @@ struct ProfileContentView: View {
     @ObservedObject var profileVM: ProfileVM
     @Environment(\.editMode) var editMode
     
+    @State private var tempName: String = ""
+    
     var body: some View {
         List {
             Section(header: Text("Username")) {
                 if editMode?.wrappedValue.isEditing == true {
-                    TextField("Name", text: $profileVM.tempUsername)
+                    TextField("Name", text: $tempName)
+                        .onAppear { tempName = profileVM.tempUsername }
                 } else {
                     Text(profileVM.user.name ?? "No name")
                 }
@@ -56,14 +71,14 @@ struct ProfileContentView: View {
             
             if editMode?.wrappedValue.isEditing == true {
                 Button("Save") {
+                    profileVM.tempUsername = tempName
                     profileVM.saveDetails()
-                    editMode?.wrappedValue = .inactive 
+                    editMode?.wrappedValue = .inactive
                 }
             }
         }
         .navigationTitle("Profile")
-        .toolbar {
-            EditButton()
-        }
+        .toolbar { EditButton() }
+        .animation(.default, value: editMode?.wrappedValue)
     }
 }

@@ -30,7 +30,7 @@ struct ContentView: View {
                 .sheet(isPresented: $showingAddView) {
                     AddPerfumeView(
                         addPerfumeVM: AddPerfumeVM(moc: moc),
-                        onSave: { viewModel.fetchPerfumes() } 
+                        onSave: { viewModel.fetchPerfumes() }
                     )
                     .environment(\.managedObjectContext, moc)
                 }
@@ -52,10 +52,7 @@ struct ContentView: View {
                             Image(systemName: showingFilterViewActive ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                         }
                     }
-                }                .sheet(isPresented: $showingAddView) {
-                    AddPerfumeView(addPerfumeVM: AddPerfumeVM(moc: moc))
-                        .environment(\.managedObjectContext, moc)
-                }
+                } 
                 .navigationDestination(for: CDPerfume.self) { perfume in
                     DetailsView(
                         detailsViewModel: DetailsViewModel(moc: moc, perfume: perfume)
