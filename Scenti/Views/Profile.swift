@@ -69,6 +69,34 @@ struct ProfileContentView: View {
                 }
             }
             
+            Section(header: Text("Favorite Notes")) {
+                if editMode?.wrappedValue.isEditing == true {
+                    ForEach(perfumeNoteTags, id: \.self) { note in
+                        HStack {
+                            Text(note.capitalized)
+                            Spacer()
+                            if profileVM.selectedNotes.contains(note) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                            }
+                        }
+                        .contentShape(Rectangle()) // чтобы кликалась вся строка
+                        .onTapGesture {
+                            profileVM.toggleNote(note)
+                        }
+                    }
+                } else {
+                    if profileVM.selectedNotes.isEmpty {
+                        Text("No favorite notes yet")
+                            .foregroundColor(.secondary)
+                    } else {
+                        ForEach(profileVM.selectedNotes, id: \.self) { note in
+                            Text("• \(note.capitalized)")
+                        }
+                    }
+                }
+            }
+            
             if editMode?.wrappedValue.isEditing == true {
                 Button("Save") {
                     profileVM.tempUsername = tempName
@@ -82,3 +110,4 @@ struct ProfileContentView: View {
         .animation(.default, value: editMode?.wrappedValue)
     }
 }
+

@@ -12,11 +12,10 @@
         <relationship name="userProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUserProfile" inverseName="favouritePerfumes" inverseEntity="CDUserProfile"/>
     </entity>
     <entity name="CDUserProfile" representedClassName="CDUserProfile" syncable="YES" codeGenerationType="class">
-        <attribute name="favoriteTags" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NSObject"/>
+        <attribute name="favoriteNotes" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSObject"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="joinDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="preferences" optional="YES" attributeType="Transformable" valueTransformerName="PreferenceTransformer"/>
         <attribute name="profilePicture" optional="YES" attributeType="Binary"/>
         <relationship name="favouritePerfumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPerfume" inverseName="userProfile" inverseEntity="CDPerfume"/>
     </entity>
