@@ -18,15 +18,22 @@ struct ContentView: View {
     @State private var searchText: String = ""
     
     @StateObject private var viewModel: PerfumeListViewModel
+    @StateObject private var profileVM: ProfileVM
         
-        init() {
+    init() {
             let moc = PersistenceController.shared.container.viewContext
             _viewModel = StateObject(wrappedValue: PerfumeListViewModel(moc: moc))
+            
+            // Подхватываем первого пользователя или создаём новый
+            let request: NSFetchRequest<CDUserProfile> = CDUserProfile.fetchRequest()
+            let user = (try? moc.fetch(request).first) ?? CDUserProfile(context: moc)
+            
+            _profileVM = StateObject(wrappedValue: ProfileVM(moc: moc, user: user))
         }
     
     var body: some View {
         NavigationStack(path: $path) {
-            PerfumeListView(path: $path, viewModel: viewModel)
+            PerfumeListView(profileVM: profileVM, path: $path, viewModel: viewModel)
                 .sheet(isPresented: $showingAddView) {
                     AddPerfumeView(
                         addPerfumeVM: AddPerfumeVM(moc: moc),

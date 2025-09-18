@@ -53,12 +53,14 @@ struct Profile: View {
 }
 
 struct ProfileContentView: View {
+    
     @ObservedObject var profileVM: ProfileVM
     @Environment(\.editMode) var editMode
     
     @State private var tempName: String = ""
     
     var body: some View {
+        ZStack(alignment: .bottom) {
         List {
             Section(header: Text("Username")) {
                 if editMode?.wrappedValue.isEditing == true {
@@ -77,7 +79,7 @@ struct ProfileContentView: View {
                             Spacer()
                             if profileVM.selectedNotes.contains(note) {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.gray)
                             }
                         }
                         .contentShape(Rectangle()) // чтобы кликалась вся строка
@@ -96,14 +98,24 @@ struct ProfileContentView: View {
                     }
                 }
             }
+        }
             
             if editMode?.wrappedValue.isEditing == true {
-                Button("Save") {
-                    profileVM.tempUsername = tempName
-                    profileVM.saveDetails()
-                    editMode?.wrappedValue = .inactive
+                            Button(action: {
+                                profileVM.tempUsername = tempName
+                                profileVM.saveDetails()
+                                editMode?.wrappedValue = .inactive
+                            }) {
+                                Text("Save")
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color.accentColor)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(12)
+                                    .padding()
+                    }
                 }
-            }
         }
         .navigationTitle("Profile")
         .toolbar { EditButton() }

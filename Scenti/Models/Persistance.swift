@@ -13,11 +13,13 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init() {
-        container = NSPersistentContainer(name: "Scenti") // <-- имя .xcdatamodeld
+        container = NSPersistentContainer(name: "Scenti") // имя .xcdatamodeld
         container.loadPersistentStores { desc, error in
             if let error = error {
                 fatalError("Core Data error: \(error.localizedDescription)")
             }
         }
+        container.persistentStoreDescriptions.first?.shouldMigrateStoreAutomatically = true
+        container.persistentStoreDescriptions.first?.shouldInferMappingModelAutomatically = true
     }
 }

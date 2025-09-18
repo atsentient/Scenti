@@ -11,7 +11,9 @@ import CoreData
 import _PhotosUI_SwiftUI
 
 class ProfileVM: ObservableObject {
+    
     private let moc: NSManagedObjectContext
+    
     let user: CDUserProfile
     
     @Published var tempUsername = ""

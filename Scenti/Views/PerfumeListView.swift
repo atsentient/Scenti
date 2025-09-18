@@ -10,45 +10,28 @@ import CoreData
 
 struct PerfumeListView: View {
     
+    @ObservedObject var profileVM: ProfileVM
     @Binding var path: [CDPerfume]
     @ObservedObject var viewModel: PerfumeListViewModel
-    @State private var showAddPerfumeView = false
     
     var body: some View {
         List {
             ForEach(viewModel.filteredPerfumes) { perfume in
-                Button {
+                PerfumeRowView(
+                    perfume: perfume,
+                    favoriteNotes: profileVM.selectedNotes,
+                    onFavouriteTap: { viewModel.toggleFavourite(for: perfume) }
+                )
+                .contentShape(Rectangle())
+                .onTapGesture {
                     path.append(perfume)
-                } label: {
-                    HStack{
-                        PerfumeRowView(
-                            perfume: perfume,
-                            onFavouriteTap: {
-                                viewModel.toggleFavourite(for: perfume)
-                                }
-                            )
-                            
-                            if let imageData = perfume.imageData,
-                               let uiImage = UIImage(data: imageData) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 100, height: 100)
-                                    .clipped()
-                                    .cornerRadius(12)
-                            }
-                        }
-                    
-                        .padding(.vertical, 6)
-                    }
-                    
                 }
-                .onDelete { offsets in
-                            offsets.forEach { viewModel.removePerfume(at: $0) }
+            }
+            .onDelete { offsets in
+                offsets.forEach { viewModel.removePerfume(at: $0) }
             }
         }
     }
-    
     
     struct TagsView: View {
         var tags: [String]
@@ -57,7 +40,8 @@ struct PerfumeListView: View {
                 HStack(spacing: 8) {
                     ForEach(tags, id: \.self) { tag in
                         Text(tag)
-                            .padding(6)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(8)
                     }
@@ -65,21 +49,49 @@ struct PerfumeListView: View {
             }
         }
     }
-
+    
     struct PerfumeRowView: View {
         @ObservedObject var perfume: CDPerfume
+        let favoriteNotes: [String]
         let onFavouriteTap: () -> Void
         
         var body: some View {
-           
-            HStack {
-                VStack(alignment: .leading) {
+            HStack(alignment: .top, spacing: 12) {
+                
+                // Фото
+                if let imageData = perfume.imageData,
+                   let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 80, height: 80)
+                        .clipped()
+                        .cornerRadius(12)
+                }
+                
+                // Текстовая информация
+                VStack(alignment: .leading, spacing: 6) {
                     Text(perfume.brand ?? "")
                         .font(.headline)
+                    
                     Text(perfume.name ?? "")
                         .font(.title2.bold())
-                    Text(perfume.notes ?? "No notes")
-                        .foregroundStyle(.brown)
+                    
+                    HStack {
+                        let notes = perfume.notes as? [String] ?? []
+                        ForEach(notes, id: \.self) { note in
+                            Text(note.capitalized)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(
+                                    favoriteNotes.contains(note)
+                                        ? Color.green.opacity(0.3)
+                                        : Color.gray.opacity(0.1)
+                                )
+                                .cornerRadius(8)
+                        }
+                    }
+                    
                     TagsView(tags: perfume.tags ?? [])
                 }
                 
@@ -91,8 +103,7 @@ struct PerfumeListView: View {
                 }
                 .buttonStyle(.plain)
             }
-
-            
+            .padding(.vertical, 6)
         }
     }
 }
