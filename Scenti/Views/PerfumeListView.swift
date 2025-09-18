@@ -33,23 +33,6 @@ struct PerfumeListView: View {
         }
     }
     
-    struct TagsView: View {
-        var tags: [String]
-        var body: some View {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(tags, id: \.self) { tag in
-                        Text(tag)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(8)
-                    }
-                }
-            }
-        }
-    }
-    
     struct PerfumeRowView: View {
         @ObservedObject var perfume: CDPerfume
         let favoriteNotes: [String]
@@ -77,22 +60,10 @@ struct PerfumeListView: View {
                     Text(perfume.name ?? "")
                         .font(.title2.bold())
                     
-                    HStack {
-                        let notes = perfume.notes as? [String] ?? []
-                        ForEach(notes, id: \.self) { note in
-                            Text(note.capitalized)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(
-                                    favoriteNotes.contains(note)
-                                        ? Color.green.opacity(0.3)
-                                        : Color.gray.opacity(0.1)
-                                )
-                                .cornerRadius(8)
-                        }
-                    }
-                    
-                    TagsView(tags: perfume.tags ?? [])
+                    TagsView(
+                        perfume: perfume,
+                        favoriteNotes: favoriteNotes
+                    )
                 }
                 
                 Spacer()
@@ -104,6 +75,29 @@ struct PerfumeListView: View {
                 .buttonStyle(.plain)
             }
             .padding(.vertical, 6)
+        }
+    }
+    
+    struct TagsView: View {
+        @ObservedObject var perfume: CDPerfume
+        let favoriteNotes: [String]
+        var body: some View {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    let notes = perfume.tags as? [String] ?? []
+                    ForEach(notes, id: \.self) { note in
+                        Text(note.capitalized)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(
+                                favoriteNotes.contains(note)
+                                    ? Color.green.opacity(0.3)
+                                    : Color.gray.opacity(0.1)
+                            )
+                            .cornerRadius(8)
+                    }
+                }
+            }
         }
     }
 }
