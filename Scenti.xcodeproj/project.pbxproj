@@ -27,6 +27,7 @@
 		D9AAA2682DC394F30020ACEC /* TagConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAA2672DC394F30020ACEC /* TagConstants.swift */; };
 		D9ADD3382DCA70C40009F71C /* PerfumeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADD3372DCA70C40009F71C /* PerfumeListViewModel.swift */; };
 		D9DAAEC82DDFC2B600E23E47 /* AddPerfumeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DAAEC72DDFC2B600E23E47 /* AddPerfumeVM.swift */; };
+		D9DC575F2E80823B00640BC3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DC575E2E80823B00640BC3 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		D9AAA2672DC394F30020ACEC /* TagConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagConstants.swift; sourceTree = "<group>"; };
 		D9ADD3372DCA70C40009F71C /* PerfumeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeListViewModel.swift; sourceTree = "<group>"; };
 		D9DAAEC72DDFC2B600E23E47 /* AddPerfumeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPerfumeVM.swift; sourceTree = "<group>"; };
+		D9DC575E2E80823B00640BC3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		D934AA652DA9712800858E86 /* Scenti */ = {
 			isa = PBXGroup;
 			children = (
+				D9DC575E2E80823B00640BC3 /* Launch Screen.storyboard */,
 				D934AA662DA9712800858E86 /* ScentiApp.swift */,
 				D934AA782DA971B600858E86 /* APIcode.swift */,
 				D934AA7D2DA9722000858E86 /* ViewModels */,
@@ -106,11 +109,11 @@
 			isa = PBXGroup;
 			children = (
 				D934AA682DA9712800858E86 /* ContentView.swift */,
-				D9816ACB2DEF7E8300DA771B /* Profile.swift */,
 				D92B94722E4768F0001308B7 /* TabView.swift */,
 				D9AAA2652DC38E4C0020ACEC /* FilterView.swift */,
 				D934AA7E2DA9724000858E86 /* PerfumeListView.swift */,
 				D9AA47C42DAB0FA50044871E /* DetailsView.swift */,
+				D9816ACB2DEF7E8300DA771B /* Profile.swift */,
 				D934AA802DA9724C00858E86 /* AddPerfumeView.swift */,
 			);
 			path = Views;
@@ -197,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9DC575F2E80823B00640BC3 /* Launch Screen.storyboard in Resources */,
 				D934AA6E2DA9712900858E86 /* Preview Assets.xcassets in Resources */,
 				D934AA6B2DA9712900858E86 /* Assets.xcassets in Resources */,
 			);

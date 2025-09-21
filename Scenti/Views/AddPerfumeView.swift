@@ -16,9 +16,7 @@ struct AddPerfumeView: View {
     
     var body: some View {
         NavigationStack {
-            
             Form {
-                
                 Section("Perfume Details") {
                     TextField("Brand", text: $addPerfumeVM.brand)
                     TextField("Name", text: $addPerfumeVM.name)
@@ -30,6 +28,10 @@ struct AddPerfumeView: View {
                     imagePickerSection
                 }
                 
+                Section("Tags") {
+                    TagSelectionView(selectedTags: $addPerfumeVM.selectedNotesTags)
+                }
+                
                 Section {
                     Button("Save") {
                         addPerfumeVM.savePerfume()
@@ -38,9 +40,7 @@ struct AddPerfumeView: View {
                     }
                     .disabled(addPerfumeVM.brand.isEmpty || addPerfumeVM.name.isEmpty)
                     .frame(maxWidth: .infinity)
-                    
                 }
-                
             }
             .navigationTitle("Add Perfume")
             .navigationBarTitleDisplayMode(.inline)
@@ -51,10 +51,8 @@ struct AddPerfumeView: View {
                     }
                 }
             }
-            
         }
     }
-
     
     @ViewBuilder
     private var imagePickerSection: some View {
@@ -73,11 +71,51 @@ struct AddPerfumeView: View {
            let uiImage = UIImage(data: imageData) {
             Image(uiImage: uiImage)
                 .resizable()
-                            .scaledToFit()
-                            .frame(height: 200)
-                            .cornerRadius(12)
-                            .padding(.vertical, 8)
+                .scaledToFit()
+                .frame(height: 200)
+                .cornerRadius(12)
+                .padding(.vertical, 8)
         }
     }
 }
 
+struct TagSelectionView: View {
+    @Binding var selectedTags: Set<String>
+    
+    var body: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 8) {
+            ForEach(perfumeNoteTags, id: \.self) { tag in
+                TagButton(text: tag,
+                          isSelected: selectedTags.contains(tag))
+                {
+                    if selectedTags.contains(tag) {
+                        selectedTags.remove(tag)
+                    }
+                    else {
+                        selectedTags.insert(tag)
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+struct TagButton: View {
+    let text: String
+    let isSelected: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text(text)
+                .font(.caption)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(isSelected ? Color.blue : Color.gray.opacity(0.3))
+                .foregroundColor(isSelected ? .white : .black)
+                .cornerRadius(16)
+        }
+        .buttonStyle(.plain)
+    }
+}
